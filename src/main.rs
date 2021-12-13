@@ -22,6 +22,11 @@ enum Advent {
         part: Option<u32>,
         input_file: PathBuf,
     },
+    D4 {
+        #[structopt(short, long)]
+        part: Option<u32>,
+        input_file: PathBuf,
+    },
 }
 
 fn day1(input_file: BufReader<File>, part: u32) {
@@ -66,6 +71,20 @@ fn day3(input_file: BufReader<File>, part: u32) {
     }
 }
 
+fn day4(input_file: BufReader<File>, part: u32) {
+    match part {
+        1 => {
+            days::day4::part1(input_file);
+        }
+        2 => {
+            days::day4::part2(input_file);
+        }
+        _ => {
+            println!("part DNE");
+        }
+    }
+}
+
 fn main() {
     let opt = Advent::from_args();
     match opt {
@@ -80,6 +99,10 @@ fn main() {
         Advent::D3{ input_file, part } => {
             let file = BufReader::new(File::open(input_file).unwrap());
             day3(file, part.unwrap_or(1));
+        }
+        Advent::D4{ input_file, part } => {
+            let file = BufReader::new(File::open(input_file).unwrap());
+            day4(file, part.unwrap_or(1));
         }
     }
 }
